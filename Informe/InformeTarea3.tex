@@ -1,0 +1,160 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cite}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+\title{
+    \small \textbf{UNIVERSIDAD DE CONCEPCIÓN}\\
+    Facultad de Ingeniería\\
+    Departamento de Ingeniería Informática y Ciencias de la Computación\\[1cm]
+    \large Proyecto Semestral - Estructuras de Datos\\[0.5cm]
+    \huge \textbf{Análisis Comparativo de Estructuras de Datos para el Procesamiento de Volúmenes de Datos}}
+
+\author{
+    \textbf{Integrantes:}\\
+    Nicolás Ricciardi \\
+    Enzo Levancini \\
+    Máximo Beltrán
+}
+\date{Julio 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ==========================================
+% 1. INTRODUCCIÓN (Máximo 1 página)
+% ==========================================
+\section{Introducción}
+\label{sec:introduccion}
+% Breve reseña de todo el trabajo realizado. 
+% Descripción a alto nivel del problema planteado y estructuras de datos utilizadas (implementadas y de bibliotecas).
+% Herramientas, fuentes de datos y conclusiones preliminares.
+
+Aquí va la reseña general del trabajo. Se debe describir a alto nivel el problema del procesamiento y conteo de tweets por usuario, justificando la necesidad de evaluar diferentes estructuras de datos tanto de bibliotecas estándar como implementadas en el curso. 
+
+Mencionar brevemente las herramientas utilizadas (ej. C++17, MinGW-w64), la fuente de datos (dataset de tweets) y adelantar las conclusiones preliminares clave respecto a qué estructura y qué tipo de clave resultó ser más eficiente.
+
+
+% ==========================================
+% 2. DESCRIPCIÓN DE ESTRUCTURAS DE DATOS (Máximo 1 página)
+% ==========================================
+\section{Descripción de las Estructuras de Datos Comparadas}
+\label{sec:estructuras}
+% Repositorio de código
+Los códigos fuentes documentados correspondientes a las implementaciones analizadas se encuentran disponibles de manera adjunta y en el siguiente repositorio de acceso público: \url{https://github.com/tu-usuario/tu-repositorio}. El desarrollo sigue el estándar de codificación adoptado para el curso.
+
+\subsection{Estructura de Datos 1 (ej. unordered\_map / Hash Table)}
+Descripción general de la primera estructura. Indicar detalladamente los costos teóricos de inserción y búsqueda en notación Big-O ($O(1)$ promedio, $O(n)$ peor caso). Especificar los parámetros de configuración utilizados (función hash implementada, número inicial de buckets, factor de carga máximo). \textit{Restricción: Máximo un párrafo por estructura, incluyendo referencias cruzadas o links si aplica \cite{cormen2009}.}% Mantener conciso.
+
+\subsection{Estructura de Datos 2 (ej. map / AVL / Red-Black Tree)}
+Descripción general de la segunda estructura. Indicar los costos de inserción y búsqueda ($O(\log n)$). Especificar los parámetros utilizados en la experimentación. \textit{Restricción: Máximo un párrafo por estructura.}
+
+\subsection{Estructura de Datos 3 (ej. Estructura Propia / Custom Hash)}
+Descripción general de la tercera estructura. Indicar costos de inserción y búsqueda, detallando el manejo de colisiones (ej. encadenamiento o direccionamiento abierto) y los parámetros específicos elegidos. \textit{Restricción: Máximo un párrafo por estructura.}
+
+
+% ==========================================
+% 3. DATASET Y AMBIENTE EXPERIMENTAL (Máximo 1 página)
+% ==========================================
+\section{Descripción del Dataset y del Ambiente de Experimentación}
+\label{sec:ambiente}
+
+\subsection{Lectura y Modificación del Dataset}
+Describir detalladamente los métodos de lectura implementados para procesar el dataset de tweets de forma eficiente (ej. parsing de líneas, manejo de buffers de entrada). Si fue necesario realizar modificaciones o limpieza previa del dataset (filtrado de nulos, corrección de codificación), se deben especificar y justificar aquí estructuralmente.
+
+\subsection{Ambiente de Hardware y Software}
+Los experimentos se llevaron a cabo en una máquina con las siguientes especificaciones técnicas detalladas en la Tabla \ref{tab:hardware}:
+
+\begin{table}[h!]
+\centering
+\caption{Especificaciones del Entorno de Pruebas}
+\label{tab:hardware}
+\begin{tabular}{ll}
+\toprule
+\textbf{Componente} & \textbf{Detalle} \\
+\midrule
+Procesador & [Modelo exacto, ej. AMD Ryzen 5 5600H] \\
+Memoria RAM & [Capacidad y velocidad, ej. 16 GB DDR4 3200 MHz] \\
+Memoria Caché & L1: [e.g., 384 KB], L2: [e.g., 3 MB], L3: [e.g., 16 MB] \\
+Sistema Operativo & [ej. Windows 11 Home / Ubuntu 22.04 LTS] \\
+Compilador & [ej. MinGW-w64 GCC 14.x] con banderas de optimización \texttt{-O2} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ==========================================
+% 4. RESULTADOS EXPERIMENTALES (Máximo 4 páginas)
+% ==========================================
+\section{Resultados Experimentales}
+\label{sec:resultados}
+
+\subsection{Tamaño de las Estructuras de Datos en Memoria}
+Se evaluó el consumo espacial de cada estructura cargada con el total de los datos. Los resultados expresados en KB o MB se resumen en la Tabla \ref{tab:memoria}.
+
+\begin{table}[h!]
+\centering
+\caption{Comparativa de Consumo de Memoria}
+\label{tab:memoria}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Estructura de Datos} & \textbf{Tamaño con \texttt{user\_id} (MB)} & \textbf{Tamaño con \texttt{user\_screen\_name} (MB)} \\
+\midrule
+Estructura 1 & & \\
+Estructura 2 & & \\
+Estructura 3 & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Rendimiento en la Creación y Escalabilidad}
+Para medir la escalabilidad en la creación de las estructuras (conteo de tweets por usuario), se registró de forma incremental el tiempo de ejecución en milisegundos a medida que aumentaba el volumen de tweets procesados (desde 10.000 hasta 180.000). 
+
+% Ejemplo de cómo incluir gráficos (deben estar en la misma carpeta)
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[width=0.7\textwidth]{grafico_escalabilidad.png}
+% \caption{Tiempo de ejecución en la creación versus cantidad de tweets procesados.}
+% \label{fig:escalabilidad}
+% \end{figure}
+
+\subsection{Análisis del Impacto del Tipo de Clave}
+Se contrastó el rendimiento de las búsquedas e inserciones utilizando \texttt{user\_id} (numérico/entero) frente a \texttt{user\_screen\_name} (cadena de texto / \texttt{std::string}). Se entrega evidencia experimental explícita de cuál clave resulta más eficiente para el cálculo de las funciones de dispersión o comparaciones de nodos en cada tipo de estructura.
+
+
+% ==========================================
+% 5. CONCLUSIONES (Máximo 1 página)
+% ==========================================
+\section{Conclusiones}
+\label{sec:conclusiones}
+% Describir los principales descubrimientos obtenidos. 
+% Hacer hincapié en las estructuras de datos más rápidas para cada tipo de experimento y en la comparación de los dos tipos de claves evaluadas.
+
+Se detallan los hallazgos principales derivados del estudio empírico. Se destaca de forma clara y justificada qué estructura de datos demostró el mejor tiempo de respuesta ante la escalabilidad de carga masiva de tweets.
+
+Asimismo, se discute el impacto del tipo de clave evaluada, concluyendo sobre la ventaja de desempeño que supone el uso de \texttt{user\_id} sobre \texttt{user\_screen\_name} debido a costos reducidos de comparación lógica y cálculo de hashes, cerrando con la relación general costo-beneficio de tiempo versus memoria.
+
+\newpage
+% ==========================================
+% REFERENCIAS
+% ==========================================
+\begin{thebibliography}{9}
+\bibitem{cormen2009}
+T. H. Cormen, C. E. Leiserson, R. L. Rivest, y C. Stein, \textit{Introduction to Algorithms}, 3rd ed. MIT Press, 2009.
+\end{thebibliography}
+
+\end{document}
