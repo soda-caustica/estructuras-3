@@ -42,44 +42,41 @@ python analisis/analizar_resultados.py
 
 *Los gráficos PNG resultantes se almacenarán automáticamente en la carpeta results/plots/.*
 
---------------------------------------------------------------------------------
+## 📂 Estructura del Proyecto
 
-Estructura del Proyecto
-
-ESTRUCTURAS-3
- |-- analisis
- |   |-- analizar_resultados.py       (Script de Python para procesar CSVs y generar gráficos)
- |-- Informe
- |   |-- InformeTarea3_TablasHash.pdf (Documento final en PDF con el estudio experimental)
- |-- results
- |   |-- plots                        (Gráficos generados: memoria y curvas de tiempo)
- |   |   |-- memoria_screen_name.png
- |   |   |-- memoria_user_id.png
- |   |   |-- tiempo_screen_name.png
- |   |   |-- tiempo_user_id.png
- |   |-- results_memoria.csv          (Datos espaciales crudos de las estructuras)
- |   |-- results_tiempos.csv          (Tiempos crudos de las iteraciones incrementales)
- |   |-- results_tiempos_resumen.csv  (Promedios y desviaciones estándar calculados)
- |-- src
- |   |-- experimentos
- |   |   |-- dataset_loader.h         (Carga modular de los bloques del dataset)
- |   |   |-- experimento.h            (Lógica de las pasadas: 20 runs por configuración)
- |   |-- tablas
- |   |   |-- tabla_hashing_abierto.hpp (Implementación con encadenamiento mediante listas)
- |   |   |-- tabla_hashing_cerrado.hpp (Implementación con Linear, Quadratic y Double Probing)
- |   |   |-- tabla_unordered_map.hpp   (Wrapper para std::unordered_map - STL Baseline)
- |   |-- utils
- |   |   |-- csv_reader.h             (Parser eficiente para el procesamiento del archivo CSV)
- |   |   |-- hash_functions.h         (integerHash de 64-bit y polynomialAccumulation)
- |   |   |-- linked_list.h            (Estructura de soporte lineal para hashing abierto)
- |   |   |-- memory_utils.h           (Herramientas para cálculo de bytes por estructura)
- |   |   |-- prime_utils.h            (Utilidades para búsqueda de tamaños primos - rehashing)
- |   |   |-- timer.h                  (Cronómetro de alta resolución con std::chrono)
- |   |-- main.cpp                     (Punto de entrada y orquestador de experimentos)
- |-- .gitignore
- |-- run_experimentos.sh              (Script de automatización de compilación y corridas)
-
---------------------------------------------------------------------------------
+```text
+📦 ESTRUCTURAS-3
+ ┣ 📂 analisis
+ ┃ ┗ 📜 analizar_resultados.py       (Script de Python para procesar CSVs y generar gráficos)
+ ┣ 📂 Informe
+ ┃ ┗ 📜 InformeTarea3_TablasHash.pdf (Documento final en PDF con el estudio experimental)
+ ┣ 📂 results
+ ┃ ┣ 📂 plots                        (Gráficos generados: memoria y curvas de tiempo)
+ ┃ ┃ ┣ 📜 memoria_screen_name.png
+ ┃ ┃ ┣ 📜 memoria_user_id.png
+ ┃ ┃ ┣ 📜 tiempo_screen_name.png
+ ┃ ┃ ┗ 📜 tiempo_user_id.png
+ ┃ ┣ 📜 results_memoria.csv          (Datos espaciales crudos de las estructuras)
+ ┃ ┣ 📜 results_tiempos.csv          (Tiempos crudos de las iteraciones incrementales)
+ ┃ ┗ 📜 results_tiempos_resumen.csv  (Promedios y desviaciones estándar calculados)
+ ┣ 📂 src
+ ┃ ┣ 📂 experimentos
+ ┃ ┃ ┣ 📜 dataset_loader.h           (Carga modular de los bloques del dataset)
+ ┃ ┃ ┗ 📜 experimento.h              (Lógica de las pasadas: 20 runs por configuración)
+ ┃ ┣ 📂 tablas
+ ┃ ┃ ┣ 📜 tabla_hashing_abierto.hpp  (Implementación con encadenamiento mediante listas)
+ ┃ ┃ ┣ 📜 tabla_hashing_cerrado.hpp  (Implementación con Linear, Quadratic y Double Probing)
+ ┃ ┃ ┗ 📜 tabla_unordered_map.hpp    (Wrapper para std::unordered_map - STL Baseline)
+ ┃ ┣ 📂 utils
+ ┃ ┃ ┣ 📜 csv_reader.h               (Parser eficiente para el procesamiento del archivo CSV)
+ ┃ ┃ ┣ 📜 hash_functions.h           (integerHash de 64-bit y polynomialAccumulation)
+ ┃ ┃ ┣ 📜 linked_list.h              (Estructura de soporte lineal para hashing abierto)
+ ┃ ┃ ┣ 📜 memory_utils.h             (Herramientas para cálculo de bytes por estructura)
+ ┃ ┃ ┣ 📜 prime_utils.h              (Utilidades para búsqueda de tamaños primos - rehashing)
+ ┃ ┃ ┗ 📜 timer.h                    (Cronómetro de alta resolución con std::chrono)
+ ┃ ┗ 📜 main.cpp                     (Punto de entrada y orquestador de experimentos)
+ ┣ 📜 .gitignore
+ ┗ 📜 run_experimentos.sh            (Script de automatización de compilación y corridas)
 
 Metodología y Diseño Experimental
 
