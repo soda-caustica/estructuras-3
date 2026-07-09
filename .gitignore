@@ -1,0 +1,13 @@
+# Dataset (70 MB): se descarga aparte, link en el enunciado
+src/dataset/
+
+# Binarios compilados
+*.exe
+*.o
+
+# Archivos auxiliares de LaTeX
+Informe/*.aux
+Informe/*.log
+Informe/*.out
+Informe/*.toc
+Informe/*.synctex.gz
