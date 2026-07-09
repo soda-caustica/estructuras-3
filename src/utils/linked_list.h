@@ -1,50 +1,61 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#include <functional>
+#include "memory_utils.h"
 #include <iostream>
 #include <tuple>
 
-// Hecho con IA ya que no se evaluan linked lists
+// Lista enlazada simple de pares (clave, contador). Se usa como bucket de la
+// tabla de hashing abierto (encadenamiento).
 template <typename T> class LinkedList {
 private:
-  // Struct representing a single node in the list
+  // Nodo individual de la lista
   struct Node {
     T key;
     int value;
     Node *next;
-    Node(const T &val1, int val2) : key(val1), next(nullptr), value(val2) {}
+    Node(const T &val1, int val2) : key(val1), value(val2), next(nullptr) {}
   };
 
-  Node *head; // Pointer to the first node
+  Node *head; // Puntero al primer nodo
 
 public:
-  // Constructor
   LinkedList() : head(nullptr) {}
 
-  // Destructor to prevent memory leaks
+  // Destructor: libera todos los nodos
   ~LinkedList() { clear(); }
 
-  // Insert a new element at the beginning of the list
-  void insert(const T &val1, int val2) {
+  // Se prohíbe copiar la lista: una copia superficial de `head` haría que dos
+  // listas liberaran los mismos nodos (double free). No se necesita copiar.
+  LinkedList(const LinkedList &) = delete;
+  LinkedList &operator=(const LinkedList &) = delete;
+
+  // true si la lista no tiene nodos
+  bool empty() const { return head == nullptr; }
+
+  // Inserta un nuevo par al inicio de la lista (O(1)) y retorna una
+  // referencia al valor recién insertado, para que la tabla hash pueda
+  // usarlo sin volver a recorrer la lista.
+  int &insert(const T &val1, int val2) {
     Node *newNode = new Node(val1, val2);
     newNode->next = head;
     head = newNode;
+    return head->value;
   }
 
-  // Print the entire list
+  // Imprime la lista completa (solo para depuración)
   void display() const {
     Node *current = head;
     while (current != nullptr) {
-      std::cout << current->data << " -> ";
+      std::cout << "(" << current->key << ", " << current->value << ") -> ";
       current = current->next;
     }
     std::cout << "nullptr" << std::endl;
   }
 
-  /// Toma un predicado y busca en la lista linealmente
-  int *search(T key) {
-    auto sig = head;
+  // Busca la clave linealmente; retorna puntero a su valor o nullptr si no está
+  int *search(const T &key) {
+    Node *sig = head;
     while (sig) {
       if (key == sig->key)
         return &(sig->value);
@@ -53,15 +64,29 @@ public:
     return nullptr;
   }
 
+  // Extrae y retorna el primer par de la lista.
+  // Precondición: la lista NO debe estar vacía (verificar con empty()).
   std::tuple<T, int> pop() {
     auto val = std::tuple<T, int>(head->key, head->value);
-    auto sig = head->next;
+    Node *sig = head->next;
     delete head;
     head = sig;
     return val;
   }
 
-  // Free all allocated memory
+  // Estimación de bytes ocupados por los nodos de esta lista (ver
+  // memory_utils.h para el detalle de heapExtraBytes)
+  size_t memoryBytes() const {
+    size_t total = 0;
+    Node *current = head;
+    while (current != nullptr) {
+      total += sizeof(Node) + heapExtraBytes(current->key);
+      current = current->next;
+    }
+    return total;
+  }
+
+  // Libera todos los nodos
   void clear() {
     Node *current = head;
     while (current != nullptr) {
