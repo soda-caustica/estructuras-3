@@ -50,45 +50,43 @@ python analisis/analizar_resultados.py
 
 *Los gráficos PNG resultantes se almacenarán automáticamente en la carpeta results/plots/, y el resumen estadístico en results/results_tiempos_resumen.csv.*
 
---------------------------------------------------------------------------------
+## 📂 Estructura del Proyecto
 
-Estructura del Proyecto
-
-ESTRUCTURAS-3
- |-- analisis
- |   |-- analizar_resultados.py       (Promedio/desv. estandar por checkpoint y graficos comparativos)
- |-- Informe
- |   |-- InformeTarea3_TablasHash.pdf (Documento final en PDF con el estudio experimental)
- |-- results
- |   |-- plots                        (Graficos generados: memoria y curvas de tiempo)
- |   |   |-- memoria_screen_name.png
- |   |   |-- memoria_user_id.png
- |   |   |-- tiempo_screen_name.png
- |   |   |-- tiempo_user_id.png
- |   |-- results_memoria.csv          (Memoria por checkpoint, una sola medicion por combinacion)
- |   |-- results_tiempos.csv          (Tiempos crudos: 20 repeticiones x 10 combinaciones x 18 checkpoints)
- |   |-- results_tiempos_resumen.csv  (Promedios y desviaciones estandar calculados)
- |-- src
- |   |-- dataset                      (auspol2019.csv - no incluido en el repo, ver enunciado)
- |   |-- experimentos
- |   |   |-- dataset_loader.h         (Parser del CSV: carga el archivo completo a memoria y extrae user_id/user_screen_name)
- |   |   |-- experimento.h            (Mide UNA pasada de tiempo o de memoria; la repeticion la maneja run_experimentos.sh)
- |   |-- tablas
- |   |   |-- tabla_hashing_abierto.hpp (Encadenamiento con listas enlazadas; factor de carga maximo 1.0)
- |   |   |-- tabla_hashing_cerrado.hpp (Direccionamiento abierto: Linear, Quadratic y Double Probing; factor de carga maximo 0.5)
- |   |   |-- tabla_unordered_map.hpp   (Wrapper de std::unordered_map: agrega memoryBytes() para poder comparar memoria contra las otras 2 estructuras)
- |   |-- utils
- |   |   |-- csv_reader.h             (Parser CSV generico segun RFC 4180: comillas, comas y saltos de linea dentro de campos)
- |   |   |-- hash_functions.h         (SplitMix64 + component sum para user_id; acumulacion polinomial + FNV-1a para user_screen_name)
- |   |   |-- linked_list.h            (Lista enlazada usada como bucket del hashing abierto)
- |   |   |-- memory_utils.h           (Estimacion de bytes extra en el heap que ocupa una clave, ej. buffer de un std::string)
- |   |   |-- prime_utils.h            (Busqueda de primos para el crecimiento de la capacidad en cada rehash)
- |   |   |-- timer.h                  (Cronometro basado en std::chrono::steady_clock)
- |   |-- main.cpp                     (Ejecutable parametrizado por argv: mide una sola combinacion estructura+clave por invocacion)
- |-- .gitignore
- |-- run_experimentos.sh              (Compila y orquesta las 210 invocaciones del ejecutable, arma los CSV finales)
-
---------------------------------------------------------------------------------
+```text
+📦 ESTRUCTURAS-3
+ ┣ 📂 analisis
+ ┃ ┗ 📜 analizar_resultados.py       (Promedio/desv. estándar por checkpoint y gráficos comparativos)
+ ┣ 📂 Informe
+ ┃ ┗ 📜 InformeTarea3_TablasHash.pdf (Documento final en PDF con el estudio experimental)
+ ┣ 📂 results
+ ┃ ┣ 📂 plots                        (Gráficos generados: memoria y curvas de tiempo)
+ ┃ ┃ ┣ 📜 memoria_screen_name.png
+ ┃ ┃ ┣ 📜 memoria_user_id.png
+ ┃ ┃ ┣ 📜 tiempo_screen_name.png
+ ┃ ┃ ┗ 📜 tiempo_user_id.png
+ ┃ ┣ 📜 results_memoria.csv          (Memoria por checkpoint, una sola medición por combinación)
+ ┃ ┣ 📜 results_tiempos.csv          (Tiempos crudos: 20 repeticiones x 10 combinaciones x 18 checkpoints)
+ ┃ ┗ 📜 results_tiempos_resumen.csv  (Promedios y desviaciones estándar calculados)
+ ┣ 📂 src
+ ┃ ┣ 📂 dataset                      (auspol2019.csv - no incluido en el repo, ver enunciado)
+ ┃ ┣ 📂 experimentos
+ ┃ ┃ ┣ 📜 dataset_loader.h           (Parser del CSV: carga el archivo completo a memoria y extrae user_id/user_screen_name)
+ ┃ ┃ ┗ 📜 experimento.h              (Mide UNA pasada de tiempo o de memoria; la repetición la maneja run_experimentos.sh)
+ ┃ ┣ 📂 tablas
+ ┃ ┃ ┣ 📜 tabla_hashing_abierto.hpp  (Encadenamiento con listas enlazadas; factor de carga máximo 1.0)
+ ┃ ┃ ┣ 📜 tabla_hashing_cerrado.hpp  (Direccionamiento abierto: Linear, Quadratic y Double Probing; factor de carga máximo 0.5)
+ ┃ ┃ ┗ 📜 tabla_unordered_map.hpp    (Wrapper de std::unordered_map: agrega memoryBytes() para comparar memoria contra las otras 2 estructuras)
+ ┃ ┣ 📂 utils
+ ┃ ┃ ┣ 📜 csv_reader.h               (Parser CSV genérico según RFC 4180: comillas, comas y saltos de línea dentro de campos)
+ ┃ ┃ ┣ 📜 hash_functions.h           (SplitMix64 + component sum para user_id; acumulación polinomial + FNV-1a para user_screen_name)
+ ┃ ┃ ┣ 📜 linked_list.h              (Lista enlazada usada como bucket del hashing abierto)
+ ┃ ┃ ┣ 📜 memory_utils.h             (Estimación de bytes extra en el heap que ocupa una clave, ej. buffer de un std::string)
+ ┃ ┃ ┣ 📜 prime_utils.h              (Búsqueda de primos para el crecimiento de la capacidad en cada rehash)
+ ┃ ┃ ┗ 📜 timer.h                    (Cronómetro basado en std::chrono::steady_clock)
+ ┃ ┗ 📜 main.cpp                     (Ejecutable parametrizado por argv: mide una sola combinación estructura+clave por invocación)
+ ┣ 📜 .gitignore
+ ┗ 📜 run_experimentos.sh            (Compila y orquesta las 210 invocaciones del ejecutable, arma los CSV finales)
+```
 
 Metodología y Diseño Experimental
 
